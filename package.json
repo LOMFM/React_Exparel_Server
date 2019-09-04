@@ -1,0 +1,35 @@
+{
+  "name": "exparel-server",
+  "version": "1.0.0",
+  "description": "This is the Server for the user frontend and admin frontend of the exparel Report application",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "NODE_ENV=development APP_ENV=development nodemon app.js",
+    "start:staging": "NODE_ENV=production APP_ENV=staging nodemon app.js",
+    "start:live": "NODE_ENV=production APP_ENV=live nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LOMFM/node_startup.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongo"
+  ],
+  "author": "Oliver",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LOMFM/node_startup/issues"
+  },
+  "homepage": "https://github.com/LOMFM/node_startup#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mongoose": "^5.6.11",
+    "path": "^0.12.7"
+  }
+}
