@@ -42,6 +42,6 @@ app.use('/api', apiRoute)
 app.use('/web', webRoute)
 
 // TODO: Setting the Route for the Frontend dist
-app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
-})
+// app.use('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
+// })
