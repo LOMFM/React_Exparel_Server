@@ -1,5 +1,6 @@
 const PatientActivity = require('../models/patientActivity.model');
 const TotalServiceStatus = require('../models/totalServiceStatus.model');
+const LiveStatus = require('../models/liveStatus.model');
 
 const mongoose = require('mongoose');
 
@@ -81,8 +82,26 @@ const savePatientAcitivy = (req, res) => {
     } )
 }
 
+
+const getOverallStatus = (req, res) => {
+    TotalServiceStatus.find( {page: "patient"}, (err, data) => {
+        if( err ){
+            res.status(500).json({
+                code: "DB_Get_Error",
+                message: 'Getting Global Status data from DB.',
+                error: err
+            })
+            return;
+        }
+        res.json({
+            status: true,
+            data: data
+        })
+    } )
+}
+
 const saveTotalServiceStatus = (req, res) => {
-    const { page, category, type, total, asc, hopd, dental_flag, dental } = req.body;
+    const { page, category, type, total, asc, hopd } = req.body;
     TotalServiceStatus.findOne({page: page, category: category, type: type}, (err, data) => {
         if( err ){
             res.status(500).json({
@@ -100,8 +119,8 @@ const saveTotalServiceStatus = (req, res) => {
             status.total = total
             status.asc = asc
             status.hopd = hopd
-            status.dental_flag = dental_flag
-            status.dental = dental
+            status.dental_flag = false
+            status.dental = 0
 
             status.save((err) => {
                 if( err ){
@@ -123,8 +142,8 @@ const saveTotalServiceStatus = (req, res) => {
             data.total = total
             data.asc = asc
             data.hopd = hopd
-            data.dental_flag = dental_flag
-            data.dental = dental
+            data.dental_flag = false
+            data.dental = 0
 
             data.save((err) => {
                 if( err ){
@@ -146,16 +165,85 @@ const saveTotalServiceStatus = (req, res) => {
 }
 
 const getLiveStatus = (req, res) => {
-
+    LiveStatus.find( {page: "patient"}, (err, data) => {
+        if( err ){
+            res.status(500).json({
+                code: "DB_Get_Error",
+                message: 'Getting Global Status data from DB.',
+                error: err
+            })
+            return;
+        }
+        res.json({
+            status: true,
+            data: data
+        })
+    } )
 }
 
 const saveLiveStatus = (req, res) => {
+    const {page, step, total, asc, hopd} = req.body
+    LiveStatus.findOne({page: page, step: step}, (err, data) => {
+        if( err ){
+            res.status(500).json({
+                code: 'DB_Get_Error',
+                message: 'Getting the Status data from DB.',
+                error: err
+            })
+            return;
+        }
+        if( !data ){
+            var status = new LiveStatus();
+            status.page = page
+            status.step = step
+            status.total = total
+            status.asc = asc
+            status.hopd = hopd
 
+            status.save((err) => {
+                if( err ){
+                    res.status(500).json({
+                        code: 'DB_Update_Error',
+                        message: 'Updating the status data into DB.',
+                        error: err
+                    })
+                }
+                else {
+                    res.json({
+                        status: true,
+                        data: status
+                    })
+                }
+            })
+        }
+        else{
+            data.total = total
+            data.asc = asc
+            data.hopd = hopd
+
+            data.save((err) => {
+                if( err ){
+                    res.status(500).json({
+                        code: 'DB_Insert_Error',
+                        message: 'Inserting the status data into DB.',
+                        error: err
+                    })
+                }
+                else {
+                    res.json({
+                        status: true,
+                        data: data
+                    })
+                }
+            })
+        }
+    })
 }
 
 module.exports = {
     getGlobalStatus,
     savePatientAcitivy,
+    getOverallStatus,
     saveTotalServiceStatus,
     getLiveStatus,
     saveLiveStatus
