@@ -182,8 +182,8 @@ const getLiveStatus = (req, res) => {
 }
 
 const saveLiveStatus = (req, res) => {
-    const {page, step, total, asc, hopd} = req.body
-    LiveStatus.findOne({page: page, step: step}, (err, data) => {
+    const {page, total, asc, hopd, _id} = req.body
+    LiveStatus.findOne({_id: _id}, (err, data) => {
         if( err ){
             res.status(500).json({
                 code: 'DB_Get_Error',
@@ -195,7 +195,6 @@ const saveLiveStatus = (req, res) => {
         if( !data ){
             var status = new LiveStatus();
             status.page = page
-            status.step = step
             status.total = total
             status.asc = asc
             status.hopd = hopd
