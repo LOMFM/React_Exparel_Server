@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TotalServiceStatusSchema = new Schema({
-    page: { type: String, default: '' },
-    category: { type: String, default: '' },
-    type: { type: String, default: '' },
+    page: { type: String },
+    category: { type: String },
+    type: { type: String },
     total: { type: Number, default: 0 },
     asc: { type: Number, default: 0 },
     hopd: { type: Number, default: 0 },
