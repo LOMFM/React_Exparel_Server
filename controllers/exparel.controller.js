@@ -1036,10 +1036,10 @@ const editPlan = (req, res) => {
             })
         }
         if (data) {
-            plan ? data.plan = plan : false;
-            status ? data.status = status : false;
-            asc_flag ? data.asc_flag = asc_flag : false;
-            hopd_flag ? data.hopd_flag = hopd_flag : false;
+            for( let key in req.body ){
+                data[key] = req.body[key]
+            }
+
 
             data.save((err) => {
                 if (err) {
