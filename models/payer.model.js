@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PayerSchema = new Schema({
     type: { type: String, default: ''},
-    coalition: { type: String, default: ''},
+    coalition: { type: mongoose.Schema.Types.ObjectId, ref: 'coalition'},
     state: { type: String, default: ''},
     active: { type: Number, default: 0},
     pending: { type: Number, default: 0},

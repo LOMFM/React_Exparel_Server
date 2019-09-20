@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const PlanSchema = new Schema({
     type: { type: String, default: ''},
-    coalition: { type: String, default: ''},
+    coalition: { type: mongoose.Schema.Types.ObjectId, ref: 'coalition'},
     category: { type: String, default: ''},
     plan: { type: Number, default: 0},
     status: { type: Number, default: 0 },

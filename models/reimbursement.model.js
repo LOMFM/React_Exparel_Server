@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ReimbursementSchema = new Schema({
     type: { type: String, default: ''},
-    coalition: { type: String, default: ''},
+    coalition: { type: mongoose.Schema.Types.ObjectId, ref: 'coalition' },
     region: { type: String },
     effective_date: { type: Number, default: 0},
     reimbursement: { type: Number, default: 0 },

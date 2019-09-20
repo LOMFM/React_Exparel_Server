@@ -9,6 +9,9 @@ router.post('/save-activity', exparelController.savePatientAcitivy);
 router.get('/total-status', exparelController.getOverallStatus);
 router.post('/save-total', exparelController.saveTotalServiceStatus);
 
+router.get('/active-status/:page/:type', exparelController.getPageActiveStatus)
+router.get('/total-status/:page', exparelController.getPageTotalStatus)
+
 //Second Page
 router.get('/live-status', exparelController.getLiveStatus)
 router.post('/live-status', exparelController.saveLiveStatus)

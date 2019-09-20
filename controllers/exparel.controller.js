@@ -248,6 +248,47 @@ const saveLiveStatus = (req, res) => {
 }
 
 
+const getPageActiveStatus = (req, res) => {
+    const page = req.params.page;
+    const type = req.params.type;
+
+    PatientActivity.find({ page: page, type: type }, (err, data) => {
+        if( err ){
+            return res.status(500).json({
+                code: "DB_Get_Error",
+                message: "Getting Activity data Error",
+                error: err
+            })
+        }
+        else {
+            return res.json({
+                status: true,
+                data: data
+            })
+        }
+    })
+}
+
+const getPageTotalStatus = (req, res) => {
+    const page = req.params.page;
+
+    TotalServiceStatus.find({ page: page, type: '' }, (err, data) => {
+        if( err ){
+            return res.status(500).json({
+                code: "DB_Get_Error",
+                message: "Getting Activity data Error",
+                error: err
+            })
+        }
+        else {
+            return res.json({
+                status: true,
+                data: data
+            })
+        }
+    })
+}
+
 const getOneActiveStatus = (req, res) => {
     const { page, category, type } = req.body
 
@@ -325,7 +366,9 @@ const getOneLiveStatus = (req, res) => {
 const saveOneActiveStatus = (req, res) => {
     const page = req.params.type
     const reqData = req.body
-    PatientActivity.findOne({page: page}, (err, data) => {
+    const category = req.body.category ? req.body.category : ''
+    const type = req.body.type ? req.body.type.type: ''
+    PatientActivity.findOne({page: page, category: category, type: type}, (err, data) => {
         if( err ){
             return res.status(500).json({
                 code: "DB_Get_Error",
@@ -382,7 +425,9 @@ const saveOneActiveStatus = (req, res) => {
 const saveOneTotalStatus = (req, res) => {
     const page = req.params.type
     const totalStatus = req.body
-    TotalServiceStatus.findOne({page: page}, (err, data) => {
+    const category = req.body.category ? req.body.category : ''
+    const type = req.body.type ? req.body.type.type: ''
+    TotalServiceStatus.findOne({page: page, category: category, type: type}, (err, data) => {
         if( err ){
             return res.status(500).json({
                 code: "DB_Get_Error",
@@ -495,7 +540,24 @@ const saveOneLiveStatus = (req, res) => {
 const getTopPayers = (req, res) => {
     const type = req.params.type;
 
-    TopPayer.find({ type: type }, (err, data) => {
+    var query = TopPayer.aggregate([
+        { 
+            $lookup : 
+                {   "from" : "coalitions", 
+                    "localField": "coalition", 
+                    "foreignField": "_id", 
+                    "as": "payer"
+                }
+        },
+        {   $unwind: "$payer"   },
+        {   
+            $project: 
+                {
+                    "payer._id": 0
+                }
+        }, 
+        {$match: {"type" : type}}])
+    query.exec((err, data) => {
         if( err ){
             return res.status(500).json({
                 code: "DB_Get_Error",
@@ -733,7 +795,7 @@ const getCoalition = (req, res) => {
 }
 
 /**
- * Insert or Update the selected coalition and statte and type data
+ * Insert or Update the selected coalition and state and type data
  * @param {*} req 
  * @param {*} res 
  */
@@ -959,7 +1021,24 @@ const getPlans = (req, res) => {
     const type = req.params.type;
     const category = req.params.category;
 
-    Plan.find({ type: type, category: category }, (err, data) => {
+    var query = Plan.aggregate([
+        { 
+            $lookup : 
+                {   "from" : "coalitions", 
+                    "localField": "coalition", 
+                    "foreignField": "_id", 
+                    "as": "payer"
+                }
+        },
+        {   $unwind: "$payer"   },
+        {   
+            $project: 
+                {
+                    "payer._id": 0
+                }
+        }, 
+        {$match: {"type" : type, "category": category}}])
+    query.exec((err, data) => {
         if (err) {
             return res.status(500).json({
                 code: 'DB_Get_Error',
@@ -1230,6 +1309,8 @@ module.exports = {
     savePatientAcitivy,
     getOverallStatus,
     saveTotalServiceStatus,
+    getPageActiveStatus,
+    getPageTotalStatus,
     getLiveStatus,
     saveLiveStatus,
     getOneActiveStatus,
