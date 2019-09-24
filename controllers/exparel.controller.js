@@ -743,7 +743,23 @@ const getCoalitionDetail = (req, res) => {
 const getCoalitionList = (req, res) => {
     const type = req.params.type;
 
-    var query = Payer.find({ type: type });
+    var query = Payer.aggregate([
+        { 
+            $lookup : 
+                {   "from" : "coalitions", 
+                    "localField": "coalition", 
+                    "foreignField": "_id", 
+                    "as": "payer"
+                }
+        },
+        {   $unwind: "$payer"   },
+        {   
+            $project: 
+                {
+                    "payer._id": 0
+                }
+        }, 
+        {$match: {"type" : type}}])
 
     query.exec((err, data) => {
         if (err) {
