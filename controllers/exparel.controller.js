@@ -291,7 +291,7 @@ const getPageTotalStatus = (req, res) => {
 
 const getOneActiveStatus = (req, res) => {
     const { page, category, type } = req.body
-
+ 
     PatientActivity.findOne({
         page: page,
         category: category,
@@ -367,7 +367,7 @@ const saveOneActiveStatus = (req, res) => {
     const page = req.params.type
     const reqData = req.body
     const category = req.body.category ? req.body.category : ''
-    const type = req.body.type ? req.body.type.type: ''
+    const type = req.body.type ? req.body.type: ''
     PatientActivity.findOne({page: page, category: category, type: type}, (err, data) => {
         if( err ){
             return res.status(500).json({
@@ -376,6 +376,7 @@ const saveOneActiveStatus = (req, res) => {
                 error: err
             })
         }
+        console.log(data);
         if( data ){
             for( let key in reqData ){
                 data[key] = reqData[key]
@@ -426,7 +427,7 @@ const saveOneTotalStatus = (req, res) => {
     const page = req.params.type
     const totalStatus = req.body
     const category = req.body.category ? req.body.category : ''
-    const type = req.body.type ? req.body.type.type: ''
+    const type = req.body.type ? req.body.type: ''
     TotalServiceStatus.findOne({page: page, category: category, type: type}, (err, data) => {
         if( err ){
             return res.status(500).json({
