@@ -376,7 +376,6 @@ const saveOneActiveStatus = (req, res) => {
                 error: err
             })
         }
-        console.log(data);
         if( data ){
             for( let key in reqData ){
                 data[key] = reqData[key]
@@ -717,7 +716,28 @@ const getCoalitionDetail = (req, res) => {
     const type = req.params.type;
     const coalition = req.params.coalition;
 
-    var query = Payer.find({ type: type, coalition: coalition }).select({ state: 1, effective_date: 1, confirm_flag: 1, medicare_flag: 1, medicaid_flag: 1, commercial_flag: 1, work_flag: 1, reimbursement: 1, comment: 1, criteria: 1, coverage_policy: 1 });
+    var query = Payer.aggregate([
+        { 
+            $lookup : 
+                {   "from" : "coalitions", 
+                    "localField": "coalition", 
+                    "foreignField": "_id", 
+                    "as": "payer"
+                }
+        },
+        {   $unwind: "$payer" },
+        {   $match: 
+                {
+                    "type": type
+                }
+        },
+        {   
+            $project: 
+                {
+                    "payer._id": 0
+                }
+        }
+        ]);
 
     query.exec((err, data) => {
         if (err) {
@@ -1083,11 +1103,11 @@ const getCoalitionPlans = (req, res) => {
     const category = req.params.category;
     const coalition = req.params.coalition;
 
-    if (category == 'medicaid ') {
-        query = Payer.find({ type: type, coalition: coalition }.select({ medicaid_active: 1, medicaid_pending: 1, medicaid_inactive: 1, state: 1 }))
+    if (category == 'medicaid') {
+        query = Payer.find({ type: type, coalition: coalition })
     }
     else if (category == 'commercial') {
-        query = Payer.find({ type: type, coalition: coalition }.select({ commercial_active: 1, commercial_pending: 1, commercial_inactive: 1, state: 1 }))
+        query = Payer.find({ type: type, coalition: coalition })
     }
     else {
         return res.status(500).json({

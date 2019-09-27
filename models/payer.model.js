@@ -19,7 +19,7 @@ const PayerSchema = new Schema({
     commercial_flag: { type: Number },
     commercial_plan: { type: Number, default: 0},
     commercial_active_plan: { type: Number, default: 0},
-    commercial_pendign_plan: { type: Number, default: 0},
+    commercial_pending_plan: { type: Number, default: 0},
     commercial_inactive_plan: { type: Number, default: 100},
     work_flag: { type: Number },
     reimbursement: { type: String, default: ''},
