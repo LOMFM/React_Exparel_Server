@@ -728,7 +728,8 @@ const getCoalitionDetail = (req, res) => {
         {   $unwind: "$payer" },
         {   $match: 
                 {
-                    "type": type
+                    "type": type,
+                    "coalition": mongoose.Types.ObjectId(coalition)
                 }
         },
         {   
