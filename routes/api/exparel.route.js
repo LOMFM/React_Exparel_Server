@@ -57,6 +57,9 @@ router.post('/edit-plans/:type/:category', exparelController.editPlan)
 router.get('/get-total-plan/:type/:category', exparelController.getTotalPlans);
 router.post('/edit-total-plan/:type/:category', exparelController.editTotalPlans);
 
+// Hospital Data
+router.get('/get-hospital/:type/:category/:coalition', exparelController.getHospital);
+
 // Coalitions
 router.get('/get-coalitions', exparelController.getAllCoalitions);
 router.post('/save-coalition', exparelController.saveCoalition);

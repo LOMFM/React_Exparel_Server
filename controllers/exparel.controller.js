@@ -1291,6 +1291,45 @@ const editTotalPlans = (req, res) => {
     })
 }
 
+const getHospital = (req, res) => {
+    const type = req.params.type;
+    const category = req.params.category;
+    const coalition = req.params.coalition;
+    console.log(type, category, coalition);
+
+    var query = Plan.aggregate([
+        { 
+            $lookup : 
+                {   "from" : "coalitions", 
+                    "localField": "coalition", 
+                    "foreignField": "_id", 
+                    "as": "payer"
+                }
+        },
+        {   $unwind: "$payer"   },
+        {   
+            $project: 
+                {
+                    "payer._id": 0
+                }
+        }, 
+        {$match: {"type" : type, "category": category, coalition: coalition}}]);
+
+    query.exec((err, data) => {
+        if( err ){
+            return res.status(500).send({
+                code: 'DB_GET_Error',
+                message: 'Get Hospital Data has Error.',
+                error: err
+            })
+        }
+        return res.send({
+            status: true,
+            data: data
+        })
+    })
+}
+
 const getAllCoalitions = (req, res) => {
     Coalition.find({}, (err, data) => {
         if (err) {
@@ -1375,5 +1414,6 @@ module.exports = {
     getTotalPlans,
     editTotalPlans,
     getAllCoalitions,
-    saveCoalition
+    saveCoalition,
+    getHospital
 }
