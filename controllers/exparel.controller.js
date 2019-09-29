@@ -836,13 +836,14 @@ const getCoalition = (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const editCoalitionDetail = (req, res) => {
+const editCoalitionDetail = async(req, res) => {
     const type = req.params.type;
     const state = req.params.state;
     const coalition = req.params.coalition;
 
     const payerData = req.body
-
+    payer_detail = await Coalition.findOne({_id: coalition});
+    
     Payer.findOne({ type: type, state: state, coalition: coalition }, (err, data) => {
         if (err) {
             return res.status(500).json({
@@ -855,7 +856,7 @@ const editCoalitionDetail = (req, res) => {
             for (let key in payerData) {
                 data[key] = payerData[key]
             }
-
+            
             data.save((err) => {
                 if (err) {
                     return res.status(500).json({
@@ -867,7 +868,8 @@ const editCoalitionDetail = (req, res) => {
                 else {
                     return res.json({
                         status: true,
-                        data: data
+                        data: data,
+                        payer: payer_detail
                     })
                 }
             })
@@ -893,7 +895,8 @@ const editCoalitionDetail = (req, res) => {
                 else {
                     return res.json({
                         status: true,
-                        data: newPayer
+                        data: newPayer,
+                        payer: payer_detail
                     })
                 }
             })
@@ -1137,11 +1140,13 @@ const getCoalitionPlans = (req, res) => {
     })
 }
 
-const editPlan = (req, res) => {
+const editPlan = async(req, res) => {
     const type = req.params.type;
     const category = req.params.category;
 
     const { coalition, plan, status, asc_flag, hopd_flag } = req.body
+
+    const payer_detail = await Coalition.findOne({_id: coalition});
 
     Plan.findOne({ type: type, category: category, coalition: coalition }, (err, data) => {
         if (err) {
@@ -1168,7 +1173,8 @@ const editPlan = (req, res) => {
                 else {
                     return res.json({
                         status: true,
-                        data: data
+                        data: data,
+                        payer: payer_detail
                     })
                 }
             })
@@ -1194,7 +1200,8 @@ const editPlan = (req, res) => {
                 else {
                     return res.json({
                         status: true,
-                        data: newPlan
+                        data: newPlan,
+                        payer: payer_detail
                     })
                 }
             })
