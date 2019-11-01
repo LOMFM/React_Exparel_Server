@@ -1,0 +1,66 @@
+<!-- Plan Section -->
+<!-- Top Ten payer section -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.title{
+			font-size: 16px;
+			text-align: center;
+		}
+
+		h2{
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.third{
+			width: 33%;
+			float: left;
+		}
+
+		.third img{
+			height: 150px;
+		}
+
+		.clearfix{
+			display: table;
+			clear: both;
+			content: "";
+		}
+	</style>
+</head>
+<body>
+	<h1 class="title">National Payer coverage (Dental Lives)</h1>
+	<div class="row">
+		<div class="third">
+			<h2>Medicare</h2>
+			<img src="{{medicare_dental_pie}}" />
+		</div>
+		<div class="third">
+			<h2>Commercial</h2>
+			<img src="{{commercial_dental_pie}}" />
+		</div>
+		<div class="third">
+			<h2>Medicaid</h2>
+			<img src="{{medicaid_dental_pie}}" />
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="third">
+			<h2>Percentage of total (Medicare)</h2>
+			<img src="{{medicare_total_pie}}" />
+		</div>
+		<div class="third">
+			<h2>Percentage of total (Commercial)</h2>
+			<img src="{{commercial_total_pie}}" />
+		</div>
+		<div class="third">
+			<h2>Percentage of total (Medicaid)</h2>
+			<img src="{{medicaid_total_pie}}" />
+		</div>
+	</div>
+</body>
+</html>

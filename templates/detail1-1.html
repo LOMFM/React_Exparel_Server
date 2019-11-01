@@ -1,0 +1,427 @@
+<!-- Plan Section -->
+<!-- Top Ten payer section -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style>
+        .page {
+            position: relative;
+            page-break-after: break;
+            display: block;
+            height: 535px;
+        }
+
+        .title {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 13px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 11px;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .half {
+            width: 50%;
+            float: left;
+        }
+
+        .table-wrapper {
+            width: 45%;
+            box-sizing: border-box;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 3px 5px;
+            border: 1px solid #eee;
+            font-size: 10px;
+        }
+
+        th {
+            background-color: #014853;
+            color: white;
+        }
+
+        tr:nth-child(2n) td {
+            background-color: #d5e6e9;
+        }
+
+        td {
+            border-bottom: 1px solid gainsboro;
+        }
+
+        .map {
+            position: relative;
+            width: 94%;
+            margin: auto;
+        }
+
+        div.state {
+            position: absolute;
+        }
+
+        div.state span.state {
+            font-size: 8px;
+            display: block;
+        }
+
+        div.state span.status {
+            font-size: 7px;
+            display: block;
+            position: relative;
+            padding-left: 8px;
+        }
+
+        span.status .legend{
+            position: absolute;
+            top: 1px;
+            display: block;
+            width: 4px;
+            height: 4px;
+            left: 0px;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+        .active .legend{
+            background: #6e328d;
+        }
+        .pending .legend{
+            background: #b5a0bf;
+        }
+        .inactive .legend{
+            background: #5a626e;
+        }
+
+        .WA {
+            top: 10px;
+            left: 85px;
+        }
+
+        .map .state.OR {
+            top: 75px;
+            left: 55px;
+        }
+
+        .map .state.CA {
+            top: 145px;
+            left: 35px;
+        }
+
+        .map .state.AK {
+            top: 320px;
+            left: 45px;
+        }
+
+        .map .state.ID {
+            top: 90px;
+            left: 140px;
+        }
+
+        .map .state.NV {
+            top: 165px;
+            left: 95px;
+        }
+
+        .map .state.MT {
+            top: 40px;
+            left: 195px;
+        }
+
+        .map .state.WY {
+            top: 115px;
+            left: 215px;
+        }
+
+        .map .state.UT {
+            top: 190px;
+            left: 170px;
+        }
+
+        .map .state.AZ {
+            top: 260px;
+            left: 160px;
+        }
+
+        .map .state.CO {
+            top: 195px;
+            left: 235px;
+        }
+
+        .map .state.NM {
+            top: 275px;
+            left: 230px;
+        }
+
+        /* +21px, left -21px */
+        .map .state.HI {
+            left: 270px;
+            top: 425px;
+        }
+
+        .map .state.ND {
+            left: 305px;
+            top: 45px;
+        }
+
+        .map .state.SD {
+            left: 305px;
+            top: 100px;
+        }
+
+        .map .state.NE {
+            left: 325px;
+            top: 160px;
+        }
+
+        .map .state.KS {
+            left: 325px;
+            top: 215px;
+        }
+
+        .map .state.OK {
+            left: 365px;
+            top: 275px;
+        }
+
+        .map .state.TX {
+            left: 365px;
+            top: 350px;
+        }
+
+        .map .state.MN {
+            left: 400px;
+            top: 75px;
+        }
+
+        .map .state.IA {
+            left: 400px;
+            top: 150px;
+        }
+
+        .map .state.MO {
+            left: 430px;
+            top: 215px;
+        }
+
+        .map .state.AR {
+            left: 445px;
+            top: 280px;
+        }
+
+        .map .state.LA {
+            left: 455px;
+            top: 345px;
+        }
+
+        .map .state.WI {
+            left: 480px;
+            top: 100px;
+        }
+
+        .map .state.IL {
+            left: 475px;
+            top: 170px;
+        }
+
+        .map .state.MS {
+            left: 500px;
+    top: 300px;
+        }
+
+        .map .state.MI {
+            left: 540px;
+            top: 100px;
+        }
+
+        .map .state.IN {
+            left: 513px;
+            top: 176px;
+        }
+
+        .map .state.OH {
+            left: 555px;
+    top: 170px;
+        }
+
+        .map .state.KY {
+            left: 535px;
+    top: 220px;
+        }
+
+        .map .state.TN {
+            left: 550px;
+    top: 257px;
+        }
+
+        .map .state.AL {
+            left: 540px;
+    top: 300px;
+        }
+
+        .map .state.FL {
+            left: 625px;
+            top: 375px;
+        }
+
+        .map .state.GA {
+            left: 585px;
+    top: 300px;
+        }
+
+        .map .state.WV {
+            left: 598px;
+    top: 194px;
+        }
+
+        .map .state.VA {
+            left: 650px;
+    top: 200px;
+        }
+
+        .map .state.NC {
+            left: 658px;
+    top: 240px;
+        }
+
+        .map .state.SC {
+            left: 632px;
+    top: 279px;
+        }
+
+        .map .state.ME {
+            right: 20px;
+    top: 37px;
+        }
+
+        .map .state.NH {
+            right: 42px;
+    top: 75px;
+        }
+
+        .map .state.VT {
+            right: 60px;
+            top: 60px;
+        }
+
+        .map .state.MA {
+            right: 20px;
+    top: 93px;
+        }
+
+        .map .state.NJ {
+            right: 55px;
+    top: 149px;
+        }
+
+        .map .state.CT {
+            right: 40px;
+    top: 138px;
+        }
+
+        .map .state.RI {
+            right: 25px;
+    top: 134px;
+        }
+
+        .map .state.NY {
+            right: 89px;
+    top: 91px;
+        }
+
+        .map .state.PA {
+            right: 122px;
+    top: 145px;
+        }
+
+        .map .state.MD {
+            right: 62px;
+    top: 200px;
+        }
+
+        .map .state.DE {
+            right: 45px;
+    top: 187px;
+        }
+
+        td{
+            word-break: break-all;
+            font-size: 6px;
+        }
+        th{
+            font-size: 7px;
+        }
+        .ASC th {
+            background-color: #014853;
+            color: white;
+        }
+
+        .ASC tr:nth-child(2n) td {
+            background-color: #d5e6e9;
+        }
+        .HOPD th {
+            background-color: #6e328d;
+            color: white;
+        }
+        .HOPD tr:nth-child(2n) td {
+            background-color: #f0e8fa;
+        }
+        .Dental th {
+            background-color: #008fd7;
+            color: white;
+        }
+        .Dental tr:nth-child(2n) td {
+            background-color: #e0edf9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <h2>{{payer}} Plan Coverage Map</h2>
+        <div class="map">
+            <img src="http://exparel-server.herokuapp.com/images/map.svg" />
+            {{states}}
+        </div>
+    </div>
+    <div class="page">
+        <h2>Exparel National {{type}} Payer Coverage ( {{payer}} )</h2>
+        {{table_data}}
+    </div>
+</body>
+
+</html>

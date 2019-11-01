@@ -1,0 +1,111 @@
+<!-- Plan Section -->
+<!-- Top Ten payer section -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style>
+        .page {
+            position: relative;
+            page-break-after: auto;
+            display: block;
+        }
+
+        .title {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .chart {
+            width: 30%;
+            float: right;
+        }
+
+        .table-wrapper{
+            width: 68%;
+            float: left;
+        }
+
+        .pie-image {
+            width: 200px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 3px 5px;
+            border: 1px solid #eee;
+            font-size: 10px;
+        }
+
+        td {
+            border-bottom: 1px solid gainsboro;
+        }
+
+        .ASC th {
+            background-color: #014853;
+            color: white;
+        }
+
+        .ASC tr:nth-child(2n) td {
+            background-color: #d5e6e9;
+        }
+        .HOPD th {
+            background-color: #6e328d;
+            color: white;
+        }
+        .HOPD tr:nth-child(2n) td {
+            background-color: #f0e8fa;
+        }
+        .Dental th {
+            background-color: #008fd7;
+            color: white;
+        }
+        .Dental tr:nth-child(2n) td {
+            background-color: #e0edf9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <h1 class="title">National Payer Out-Patient {{type}} {{category}}</h1>
+        <div class="row">
+            <div class="table-wrapper">
+                <h2>{{type}} {{category}} payer</h2>
+                {{table_data}}
+                
+            </div>
+            <div class="chart">
+                <h2 style="font-size: 10px;">Exparel (PF) has Unrestricted Access for {{total_status}}% of {{type}} Commercial Lives in All
+                    Locations</h2>
+                <img src="{{chart}}" />
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</body>
+
+</html>

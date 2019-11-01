@@ -1,0 +1,84 @@
+<!-- Out Patient Coverate Statistics Section ( top 7 components and bottom 4 components) -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.title{
+			font-size: 16px;
+			text-align: center;
+		}
+
+		h2{
+			font-size: 12px;
+			text-align: center;
+		}
+
+		.quater{
+			width: 25%;
+			float: left;
+		}
+
+		.two img{
+			height: 80px;
+			display: block;
+			margin-bottom: 5px;
+		}
+		.one img{
+			height: 150px;
+		}
+
+		.clearfix{
+			display: table;
+			clear: both;
+			content: "";
+		}
+		.two img:last-child{
+			margin-left: 15px;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="title">National Payer coverage (Out-Patient Surgery Lives)</h1>
+	<div class="row">
+		<div class="quater two">
+			<h2>Medicare</h2>
+			<img src="{{medicare_asc_pie}}" />
+			<img src="{{medicare_hopd_pie}}" />
+		</div>
+		<div class="quater two">
+			<h2>Commercial</h2>
+			<img src="{{commercial_asc_pie}}" />
+			<img src="{{commercial_hopd_pie}}" />
+		</div>
+		<div class="quater two">
+			<h2>Medicaid</h2>
+			<img src="{{medicaid_asc_pie}}" />
+			<img src="{{medicaid_hopd_pie}}" />
+		</div>
+		<div class="quater one">
+			<h2>VA</h2>
+			<img src="{{va_asc_pie}}" />
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="row">
+		<div class="quater one">
+			<h2>Medicare Total Percent</h2>
+			<img src="{{medicare_total_pie}}" />
+		</div>
+		<div class="quater one">
+			<h2>Commercial Total Percent</h2>
+			<img src="{{commercial_total_pie}}" />
+		</div>
+		<div class="quater one">
+			<h2>Medicaid Total Percent</h2>
+			<img src="{{medicaid_total_pie}}" />
+		</div>
+		<div class="quater one">
+			<h2>VA/DOD Total Percent</h2>
+			<img src="{{va_total_pie}}" />
+		</div>
+	</div>
+</body>
+</html>

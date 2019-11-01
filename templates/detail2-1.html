@@ -1,0 +1,168 @@
+<!-- Plan Section -->
+<!-- Top Ten payer section -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <style>
+        .page {
+            position: relative;
+            page-break-after: break;
+            display: block;
+            height: 535px;
+        }
+
+        .title {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 13px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 12px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 11px;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .half {
+            width: 50%;
+            float: left;
+        }
+
+        .table-wrapper {
+            width: 45%;
+            box-sizing: border-box;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 3px 5px;
+            border: 1px solid #eee;
+            font-size: 10px;
+        }
+
+        th {
+            background-color: #014853;
+            color: white;
+        }
+
+        tr:nth-child(2n) td {
+            background-color: #d5e6e9;
+        }
+
+        td {
+            border-bottom: 1px solid gainsboro;
+        }
+
+        .map {
+            position: relative;
+            width: 94%;
+            margin: auto;
+        }
+
+        div.state {
+            position: absolute;
+        }
+
+        div.state span.state {
+            font-size: 8px;
+            display: block;
+        }
+
+        div.state span.status {
+            font-size: 7px;
+            display: block;
+            position: relative;
+            padding-left: 8px;
+        }
+
+        span.status .legend{
+            position: absolute;
+            top: 1px;
+            display: block;
+            width: 4px;
+            height: 4px;
+            left: 0px;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+        .active .legend{
+            background: #6e328d;
+        }
+        .pending .legend{
+            background: #b5a0bf;
+        }
+        .inactive .legend{
+            background: #5a626e;
+        }
+        td{
+            word-break: break-all;
+            font-size: 6px;
+        }
+        th{
+            font-size: 7px;
+        }
+        .ASC th {
+            background-color: #014853;
+            color: white;
+        }
+
+        .ASC tr:nth-child(2n) td {
+            background-color: #d5e6e9;
+        }
+        .HOPD th {
+            background-color: #6e328d;
+            color: white;
+        }
+        .HOPD tr:nth-child(2n) td {
+            background-color: #f0e8fa;
+        }
+        .Dental th {
+            background-color: #008fd7;
+            color: white;
+        }
+        .Dental tr:nth-child(2n) td {
+            background-color: #e0edf9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <h2>Exparel National {{type}} Payer Coverage ( {{payer}} )</h2>
+        {{table_data}}
+    </div>
+</body>
+
+</html>

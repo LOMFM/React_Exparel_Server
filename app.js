@@ -27,10 +27,10 @@ app.use((req, res, next) => {
 })
 
 app.use(cookieParser())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(express.json({limit: '50mb'}))
-app.use(express.urlencoded({extended: false, limit: '50mb'}))
+app.use(bodyParser.json({limit: '1000mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '1000mb', extended: true}))
+app.use(express.json({limit: '1000mb', extended: true}))
+app.use(express.urlencoded({extended: true, limit: '1000mb'}))
 //TODO: Session Setting
 
 //TODO: Static Setting ( frontend dist, frontend landing, upload )
@@ -48,6 +48,10 @@ const apiRoute = require('./routes/api.route.js')
 const webRoute = require('./routes/web.route.js')
 app.use('/api', apiRoute)
 app.use('/web', webRoute)
+
+app.get('/download', (req, res) => {
+    
+});
 
 // TODO: Setting the Route for the Frontend dist
 // app.use('*', (req, res) => {
